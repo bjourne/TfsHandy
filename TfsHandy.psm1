@@ -180,7 +180,7 @@ function Colorize-Status {
     )
     Process {
         $line = $InputObject | Out-String
-        if ($line -match "^(File name|\-\-\-\-\-\-|\$/|\d+ change)") {
+        if ($line -match "^(File name|\-\-\-\-\-\-|\$/|\d+ change|There are no pending changes)") {
         }
         elseif ($line.trim() -eq "") {
         }
@@ -304,10 +304,16 @@ function Show-TfsChangeset([int]$cnum, [bool]$verbose) {
     }
 }
 
+function Push-TfsChangeset() {
+    #requires -version 2
+    tf checkin $args
+}
+
 ##############################################################################
+New-Alias -name myci -value Push-TfsChangeset
 New-Alias -name mycs -value Show-TfsChangeset
 New-Alias -name mydf -value Show-TfsDiff
 New-Alias -name myhi -value Show-TfsHistory
 New-Alias -name myst -value Show-TfsStatus
 
-Export-ModuleMember -Function Show-* -Alias mycs,mydf,myhi,myst
+Export-ModuleMember -Function Show-*,Push-* -Alias myci,mycs,mydf,myhi,myst
