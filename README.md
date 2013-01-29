@@ -7,12 +7,19 @@ data.
 
 Commands
 ========
-
 Command with its alias in paranthesis explained below:
 
- * Show-TfsDiff (mydiff): unified diff of all workspace changes.
+Show-TfsDiff (mydf)
+---------------------
+Unified diff of all workspace changes.
    
- * Show-TfsHistory (myhi): show the last 30 checkins.
+Show-TfsHistory (myhi)
+----------------------
+Show the last N (default 30) checkins:
 
- * Show-TfsChangeset (mycs): show details about a specific checkin. If
-   verbose, then all diffs contained in that checkin is listed.
+    myhi -path "path/to/it" -limit 60
+    
+Show-TfsChangeset (mycs)
+------------------------
+Show details about a specific checkin. If verbose, then all diffs
+contained in that checkin is listed.

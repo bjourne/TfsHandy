@@ -273,7 +273,7 @@ function Show-TfsStatus {
     tf status /recursive $args | Colorize-Status
 }
 
-function Show-TfsHistory([int]$limit = 30) {
+function Show-TfsHistory([string]$path = ".", [int]$limit = 30) {
     if (!(test-path variable:DEVS)) {
         PrintRed "For this command to work, the variable DEVS "  
         PrintRed "need to be set to an associative array mapping names " 
@@ -282,7 +282,7 @@ function Show-TfsHistory([int]$limit = 30) {
         return
     }
 
-    tf history . /recursive /noprompt /stopafter:$limit | Colorize-History
+    tf history $path /recursive /noprompt /stopafter:$limit | Colorize-History
 }
 
 function Show-TfsChangeset([int]$cnum, [bool]$verbose) {
