@@ -133,7 +133,7 @@ function PrintChangesetLine(
 ##############################################################################
 # Colorizers #################################################################
 ##############################################################################
-function Colorize-Diff {
+function Format-Diff {
     <#
     .Synopsis
         Redirects a Universal DIFF encoded text from the pipeline to the host using colors to highlight the differences.
@@ -262,7 +262,7 @@ function Show-TfsDiff {
     if ($args.length -eq 0) {
         [Array]$args = "."
     }
-    tf diff $args /recursive /noprompt | Colorize-Diff
+    tf diff $args /recursive /noprompt | Format-Diff
 }
 
 function Show-TfsStatus {
@@ -300,7 +300,7 @@ function Show-TfsChangeset([int]$cnum, [bool]$verbose) {
         return
     }
     $diffFiles | foreach {
-        tf diff $_ /noprompt $versionOpt | Colorize-Diff
+        tf diff $_ /noprompt $versionOpt | Format-Diff
     }
 }
 
@@ -316,4 +316,4 @@ New-Alias -name mydf -value Show-TfsDiff
 New-Alias -name myhi -value Show-TfsHistory
 New-Alias -name myst -value Show-TfsStatus
 
-Export-ModuleMember -Function Show-*,Push-* -Alias myci,mycs,mydf,myhi,myst
+Export-ModuleMember -Function Format-Diff,Show-*,Push-* -Alias myci,mycs,mydf,myhi,myst
